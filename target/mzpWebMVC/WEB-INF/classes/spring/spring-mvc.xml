@@ -58,7 +58,7 @@
         <mvc:message-converters register-defaults="false">
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <!--方法一，设置消息转换器StringHttpMessageConverter的默认字符编码-->
-                <!--<constructor-arg value="utf-8"/>-->
+                <constructor-arg value="utf-8"/>
 
                 <!--方法二-->
                 <property name="supportedMediaTypes">

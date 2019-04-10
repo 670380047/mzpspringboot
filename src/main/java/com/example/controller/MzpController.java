@@ -5,10 +5,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +21,7 @@ import java.util.Map;
  * @Software: IntelliJ IDEA 2019.3.15
  */
 @Controller
+//@SessionAttributes("UserInfo123")
 @RequestMapping("/mzp")
 public class MzpController {
     //添加一个日志器
@@ -130,11 +128,11 @@ public class MzpController {
     //注解了@ModelAttribute的方法会在功能处理方法@RequestMapping之前执行
     //并且把UserInfo实体对象添加到功能处理方法的入参Model（数据模型）中去,
     //实体对象的名字就是@ModelAttribute("UserInfo123")的参数值UserInfo123
-    @ModelAttribute("UserInfo123")
+    //@ModelAttribute("UserInfo123")
     public UserInfo getUserInfo(){
         UserInfo userInfo = new UserInfo();
         userInfo.setUsername("毛宗鹏");
-        //userInfo.setPassword("123");
+        userInfo.setPassword("123");
         userInfo.setSex("男");
         userInfo.setAge(24);
         System.out.println("UserInfo已执行（在@RequestMapping之前）！实体类UserInfo123已经注入到Model中");
@@ -161,4 +159,7 @@ public class MzpController {
         System.out.println("性别："+userInfo.getSex());
         return "jsp/modelAttr";
     }
+
+
+
 }
