@@ -6,8 +6,8 @@ package com.example.mzpspringboot.controller;/**
  * @Software: IntelliJ IDEA 2019.3.15
  */
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Description:
  * @Date: 2019/4/10 14:44
  */
-@Controller
+@RestController
 @RequestMapping("mzp")
 public class TestController {
     @RequestMapping("index")
-    public void index(){
-
+    public String index(){
+        System.out.println("进入index");
+        return "测试";
     }
 }
