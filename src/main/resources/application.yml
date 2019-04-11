@@ -1,0 +1,7 @@
+#yml配置需要再":"后面加一个空格
+#日志配置
+logging:
+#日志文件的位置
+  path: E:\mzp\IDEA\workspace\mzpWebMVC\mzpspringboot
+#日志文件的名字
+  file: mzpspringboot.log
