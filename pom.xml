@@ -33,6 +33,7 @@
                 <!--</exclusion>-->
             <!--</exclusions>-->
         </dependency>
+
         <!--移除之后会报错，加入下面这个依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -43,8 +44,9 @@
 
         <!--部署到外部Tomcat使用。导入servlet-->
         <!--<dependency>-->
-        <!--<groupId>javax.servlet</groupId>-->
-        <!--<artifactId>javax.servlet-api</artifactId>-->
+            <!--<groupId>javax.servlet</groupId>-->
+            <!--<artifactId>javax.servlet-api</artifactId>-->
+            <!--<scope>provided</scope>-->
         <!--</dependency>-->
 
         <dependency>
