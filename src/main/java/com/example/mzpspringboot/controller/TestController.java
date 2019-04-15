@@ -6,6 +6,7 @@ package com.example.mzpspringboot.controller;/**
  * @Software: IntelliJ IDEA 2019.3.15
  */
 
+import com.example.mzpspringboot.model.UserInfo;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("mzp")
 public class TestController {
     @RequestMapping("index")
-    public String index(){
+    public UserInfo index(){
         System.out.println("进入index");
-        return "测试";
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUsername("毛宗鹏");
+        userInfo.setAge(24);
+        userInfo.setPassword("123");
+        return userInfo;
     }
 }
