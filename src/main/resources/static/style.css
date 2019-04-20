@@ -1,0 +1,18 @@
+body{
+    background-color: #cccccc;
+    /*字体设置。多个备选字体，从左到右依次选择。如果第一个没有就用第二个。。。。以此类推*/
+    font-family: Arial,helvetica,sans-serif;
+}
+
+.bookHeadline{
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.bookDescription{
+    font-size: 10pt;
+}
+
+label{
+    font-weight: bold;
+}

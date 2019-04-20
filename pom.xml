@@ -2,12 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <!--maven会根据这个parent中的springboot版本，来为其他依赖寻找最合适的版本，所以下面的依赖不需要指定版本-->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.example</groupId>
     <artifactId>mzpspringboot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -23,6 +25,9 @@
 
     <dependencies>
         <dependency>
+            <!--spring-boot-starter-***  是springboot的起步依赖。他会根据当前使用的springboot
+            版本来选择合适的（经过测试的版本）的依赖版本，并且会导入该依赖所需要的其他依赖
+            -->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <!--移除嵌入式tomcat插件（因为要使用外部的tomcat）-->
@@ -34,7 +39,7 @@
             <!--</exclusions>-->
         </dependency>
 
-        <!--移除之后会报错，加入下面这个依赖-->
+        <!--移除之后会报错,因为打成war包需要servlet，加入tomcat。或者直接加入下下个依赖servlet-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -42,7 +47,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--部署到外部Tomcat使用。导入servlet-->
+        <!--部署到外部Tomcat时使用，因为打成war包需要servlet。导入servlet。 也可以用直接导入tomcat-->
         <!--<dependency>-->
             <!--<groupId>javax.servlet</groupId>-->
             <!--<artifactId>javax.servlet-api</artifactId>-->
@@ -55,6 +60,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!--===============自己导入===============-->
         <!--logback日志依赖 可以不加。因为spring-boot-starter-web已经依赖于它-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -66,8 +72,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            <version>2.1.4.RELEASE</version>
         </dependency>
+
+        <!--持久化-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-data-jpa</artifactId>-->
+        <!--</dependency>-->
 
         <!--Springboot热部署-->
         <dependency>
@@ -86,6 +97,9 @@
 
         <plugins>
             <plugin>
+                <!--maven构建插件。主要功能是项目打包成可执行的超级JAR（uber-jar），
+                包括把应用程序的所有依赖打入jar中，并未jar添加一个描述文件，其中的内容能让项目通过
+                java -jar来运行-->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>

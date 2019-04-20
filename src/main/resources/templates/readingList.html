@@ -1,0 +1,43 @@
+<!--<!DOCTYPE html >-->
+<!--<html lang="en"  xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>my first thymeleaf</title>-->
+    <!--<link rel="stylesheet" th:href="@{/style.css}"/>-->
+<!--</head>-->
+<!--<body>-->
+    <!--<h2>你的阅读列表</h2>-->
+    <!--<div th:unless="${#lists.isEmpty(books)}">-->
+        <!--<dl th:each="book:${books}">-->
+            <!--<dt calss="bookHeadline">-->
+                <!--<span th:text="${book.title}">Title</span>by-->
+                <!--<span th:text="${book.author}">author</span>-->
+               <!--(ISNN: <span th:text="${book.isbn}">ISBN</span>)-->
+            <!--</dt>-->
+            <!--<dd class ="bookDescription">-->
+                <!--<span th:if="${book.description}"-->
+                      <!--th:text="${book.description}">description-->
+                <!--</span>-->
+                <!--<span th:if="${book.description eq null}">-->
+                    <!--No description available-->
+                <!--</span>-->
+            <!--</dd>-->
+        <!--</dl>-->
+    <!--</div>-->
+
+    <!--&lt;!&ndash;水平分割线&ndash;&gt;-->
+    <!--<hr/>-->
+    <!--<h3>添加一本书</h3>-->
+    <!--<form method="post">-->
+        <!--<label for="title">Title:</label>-->
+        <!--<input type="text" name="title" size="50"/><br/>-->
+        <!--<label for="author">Author</label>-->
+        <!--<input type="text" name="author" size="50"/><br/>-->
+        <!--<label for="isbn">ISBN</label>-->
+        <!--<input type="text" name="isbn" size="15"/><br/>-->
+        <!--<label for="description" >Description</label><br/>-->
+        <!--<textarea name="description" cols="80" rows="5"/><br/>-->
+        <!--<input type="submit"/>-->
+    <!--</form>-->
+<!--</body>-->
+<!--</html>-->
