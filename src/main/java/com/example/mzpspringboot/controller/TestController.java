@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date: 2019/4/10 14:44
  */
 @RestController
-@RequestMapping("mzp")
+@RequestMapping
 public class TestController {
     @RequestMapping("index")
     public UserInfo index(){
@@ -27,5 +27,17 @@ public class TestController {
         userInfo.setAge(24);
         userInfo.setPassword("123");
         return userInfo;
+    }
+
+    //	默认访问页面
+    @RequestMapping("/welcome")
+    public String hello(){
+        System.out.println("进入欢迎界面。。。。。。");
+        return "Hello Spring Boot";
+    }
+
+    @RequestMapping("/dev")
+    public String testDeployment(){
+        return "Spring Boot热部署";
     }
 }
