@@ -74,6 +74,7 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
+
         <!--持久化-->
         <!--<dependency>-->
             <!--<groupId>org.springframework.boot</groupId>-->
@@ -116,22 +117,23 @@
         </plugins>
 
         <!--项目相关的所有资源路径列表。如配置文件。 最终会被打包。-->
-        <resources>
-            <resource>
-                <!--资源文件存放的路径。该路径相对于pom路径-->
-                <directory>src/main/resources</directory>
-                <!--包含的列表-->
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.xml</include>
-                </includes>
-                <!--排除的列表。如果include和exclude冲突，则以exclude为准-->
-                <!--<excludes>-->
-                    <!--<exclude></exclude>-->
-                <!--</excludes>-->
+        <!--<resources>-->
+            <!--<resource>-->
+                <!--&lt;!&ndash;资源文件存放的路径。该路径相对于pom路径&ndash;&gt;-->
+                <!--<directory>src/main/resources</directory>-->
+                <!--&lt;!&ndash;包含的列表&ndash;&gt;-->
+                <!--<includes>-->
+                    <!--&lt;!&ndash;（添加了这两个，导致thymeleaf页面跳转失败）&ndash;&gt;-->
+                    <!--&lt;!&ndash;<include>**/*.properties</include>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<include>**/*.xml</include>&ndash;&gt;-->
+                <!--</includes>-->
+                <!--&lt;!&ndash;排除的列表。如果include和exclude冲突，则以exclude为准&ndash;&gt;-->
+                <!--&lt;!&ndash;<excludes>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<exclude></exclude>&ndash;&gt;-->
+                <!--&lt;!&ndash;</excludes>&ndash;&gt;-->
 
-            </resource>
-        </resources>
+            <!--</resource>-->
+        <!--</resources>-->
     </build>
 
 

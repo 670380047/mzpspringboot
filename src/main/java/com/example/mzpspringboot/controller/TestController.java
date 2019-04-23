@@ -7,8 +7,12 @@ package com.example.mzpspringboot.controller;/**
  */
 
 import com.example.mzpspringboot.model.UserInfo;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -16,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description:
  * @Date: 2019/4/10 14:44
  */
-@RestController
+@Controller
 @RequestMapping
 public class TestController {
     @RequestMapping("index")
@@ -31,12 +35,15 @@ public class TestController {
 
     //	默认访问页面
     @RequestMapping("/welcome")
-    public String hello(){
-        System.out.println("进入欢迎界面。。。。。。");
-        return "Hello Spring Boot";
+    public String hello(HttpServletRequest request, Model model){
+        model.addAttribute("username",request.getParameter("username"));
+        model.addAttribute("password",request.getParameter("password"));
+        System.out.println("进入主页。。。。。。");
+        return "main";
     }
 
     @RequestMapping("/dev")
+    @ResponseBody
     public String testDeployment(){
         return "Spring Boot热部署";
     }
