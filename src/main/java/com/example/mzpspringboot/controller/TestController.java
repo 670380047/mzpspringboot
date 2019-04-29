@@ -7,12 +7,14 @@ package com.example.mzpspringboot.controller;/**
  */
 
 import com.example.mzpspringboot.model.UserInfo;
+import com.example.mzpspringboot.service.CheckUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  *
@@ -23,6 +25,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping
 public class TestController {
+    @Autowired
+    CheckUserService checkUserService;
+
     @RequestMapping("index")
     public UserInfo index(){
         System.out.println("进入index");
@@ -35,11 +40,17 @@ public class TestController {
 
     //	默认访问页面
     @RequestMapping("/welcome")
-    public String hello(HttpServletRequest request, Model model){
-        model.addAttribute("username",request.getParameter("username"));
-        model.addAttribute("password",request.getParameter("password"));
-        System.out.println("进入主页。。。。。。");
-        return "main";
+    public String hello(HttpServletRequest request, Map map){
+        map.put("username",request.getParameter("username"));
+        map.put("password",request.getParameter("password"));
+        if(checkUserService.checkUser(map)){
+            System.out.println("进入主页。。。。。。");
+            map.put("message","登陆成功");
+            return "main";
+        }
+        map.put("message","用户名密码不正确");
+        return "login";
+
     }
 
     @RequestMapping("/dev")
