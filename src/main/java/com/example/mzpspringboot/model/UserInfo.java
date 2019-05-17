@@ -6,6 +6,9 @@ package com.example.mzpspringboot.model;/**
  * @Software: IntelliJ IDEA 2019.3.15
  */
 
+
+import javax.persistence.*;
+
 /**
  *
  * @Author maozp3
@@ -13,10 +16,16 @@ package com.example.mzpspringboot.model;/**
  * @Date: 2019/4/12 11:15
  */
 
+@Entity  //表名这是个实体类
+@Table(name = "userInfo")  //表名  会将驼峰式转换为下划线 user_info
 public class UserInfo {
+    @Id  //主键
+    @GeneratedValue(strategy = GenerationType.IDENTITY)   //mysql和sqlserver的自增策略。 oracle用SEQUENCE
+    @Column(name = "id")   //列名。
+    private Long id;  //mysql中自增长类型一定要是数值类型，不能是String
     private String username;
     private String password;
-    private int age;
+    private int myAge;
 
     public String getUsername() {
         return username;
@@ -34,11 +43,19 @@ public class UserInfo {
         this.password = password;
     }
 
-    public int getAge() {
-        return age;
+    public int getMyAge() {
+        return myAge;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setMyAge(int myAge) {
+        this.myAge = myAge;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

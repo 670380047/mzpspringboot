@@ -8,5 +8,21 @@
 用户名:<span th:text="${username}"></span> <br/>
 密码:<span th:text="${password}"></span>
     <p th:text="${message}"/>
+
+    <table align="center" border="1" cellspacing="0">
+        <tr>
+            <td>id</td>
+            <td>username</td>
+            <td>password</td>
+            <td>age</td>
+        </tr>
+        <!--遍历userInfoList-->
+        <tr th:each="userInfo:${userInfoList}">
+            <td th:text="${userInfo.id}"></td>
+            <td th:text="${userInfo.username}"></td>
+            <td th:text="${userInfo.password}"></td>
+            <td th:text="${userInfo.myAge}"></td>
+        </tr>
+    </table>
 </body>
 </html>

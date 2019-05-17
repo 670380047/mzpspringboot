@@ -6,6 +6,7 @@ package com.example.mzpspringboot.controller;/**
  * @Software: IntelliJ IDEA 2019.3.15
  */
 
+import com.example.mzpspringboot.dao.IUserInfoDao;
 import com.example.mzpspringboot.model.UserInfo;
 import com.example.mzpspringboot.service.CheckUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,13 +29,17 @@ import java.util.Map;
 public class TestController {
     @Autowired
     CheckUserService checkUserService;
+    @Autowired
+    IUserInfoDao userInfoDao;
+
+
 
     @RequestMapping("index")
     public UserInfo index(){
         System.out.println("进入index");
         UserInfo userInfo = new UserInfo();
         userInfo.setUsername("毛宗鹏");
-        userInfo.setAge(24);
+        userInfo.setMyAge(24);
         userInfo.setPassword("123");
         return userInfo;
     }
@@ -45,6 +51,8 @@ public class TestController {
         map.put("password",request.getParameter("password"));
         if(checkUserService.checkUser(map)){
             System.out.println("进入主页。。。。。。");
+            List<UserInfo> userInfoList = userInfoDao.findAll();
+            map.put("userInfoList", userInfoList);   //未完成，未向页面传值
             map.put("message","登陆成功");
             return "main";
         }

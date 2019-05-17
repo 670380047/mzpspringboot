@@ -24,7 +24,7 @@ public class PageTestController {
 //       UserInfo userInfo  = new UserInfo();
 //       userInfo.setUsername("小明");
 //       userInfo.setPassword("123");
-//       userInfo.setAge(24);
+//       userInfo.setMyAge(24);
 
        System.out.println("进入登陆界面。。。。");
        return "login";
