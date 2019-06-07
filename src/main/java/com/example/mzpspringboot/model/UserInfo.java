@@ -25,7 +25,7 @@ public class UserInfo {
     private Long id;  //mysql中自增长类型一定要是数值类型，不能是String
     private String username;
     private String password;
-    private int myAge;
+    private Integer myAge;
 
     public String getUsername() {
         return username;
@@ -43,11 +43,11 @@ public class UserInfo {
         this.password = password;
     }
 
-    public int getMyAge() {
+    public Integer getMyAge() {
         return myAge;
     }
 
-    public void setMyAge(int myAge) {
+    public void setMyAge(Integer myAge) {
         this.myAge = myAge;
     }
 

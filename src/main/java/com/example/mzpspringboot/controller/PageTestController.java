@@ -7,6 +7,7 @@ package com.example.mzpspringboot.controller;/**
  */
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -20,7 +21,7 @@ public class PageTestController {
 
 
     @RequestMapping("/")
-    public String login(){
+    public String login(Model model){
 //       UserInfo userInfo  = new UserInfo();
 //       userInfo.setUsername("小明");
 //       userInfo.setPassword("123");

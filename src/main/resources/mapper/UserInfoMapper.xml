@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mzpspringboot.dao.IUserInfoMapper" >
+    <select id="getAll" resultType="userInfo">
+        select  id,username,my_age myAge , password from user_info
+    </select>
+
+    <!--useGeneratedKeys="true"   用于使用jdbc的getGeneratedKeys 来获取自增长的主键-->
+    <insert id="insertUserInfo" parameterType="userInfo" useGeneratedKeys="true">
+        insert into user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="username != null">
+              username,
+          </if>
+          <if test="password != null">
+              password,
+          </if>
+          <if test="myAge != null">
+              my_age,
+          </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username != null">
+                #{username},
+            </if>
+            <if test="password != null">
+                #{password},
+            </if>
+            <if test="myAge != null">
+                #{myAge},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateUserInfo" parameterType="UserInfo">
+        update user_info
+        <set>
+            <if test="username != null">
+                username = #{username}
+            </if>
+            <if test="password != null">
+                password = #{password}
+            </if>
+            <if test="myAge != null">
+                my_age = #{myAge}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserInfo" parameterType="UserInfo">
+        delete user_info
+        where id = #{id}
+    </delete>
+</mapper>
