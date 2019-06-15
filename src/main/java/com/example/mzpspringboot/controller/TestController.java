@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,22 +50,19 @@ public class TestController {
     }
 
     //	默认访问页面
-    @RequestMapping("/welcome")
+    @RequestMapping("welcome")
     public String hello(HttpServletRequest request, Map map){
         map.put("username",request.getParameter("username"));
         map.put("password",request.getParameter("password"));
         if(checkUserService.checkUser(map)){
             System.out.println("进入主页。。。。。。");
-            //jpa
+                //jpa
             //List<UserInfo> userInfoList = userInfoDao.findAll();
-            //mybatis
-            List<UserInfo> userInfoList = checkUserService.getAll();
-            //这里只是为了和分页共用一个也而多封了一层map,并且key就是"list"
-            Map<String,List<UserInfo>> mapList = new HashMap<>();
-            mapList.put("list", userInfoList);
-            map.put("userInfoList", mapList);   //未完成，未向页面传值
+                //mybatis
+            //PageInfo<UserInfo> pageInfo = checkUserService.getAll(0,3);
+            //map.put("userInfoList", pageInfo);
             map.put("message","登陆成功");
-            return "main";
+            return "redirect:getAll?start=1";
         }
         map.put("message","用户名密码不正确");
         return "login";
@@ -90,7 +86,7 @@ public class TestController {
 
 
 
-    @RequestMapping("/selectAll")
+    @RequestMapping("selectAll")
     public String selectAll(ModelMap modelMap){
         //获取所有用户信息
         List<UserInfo> userInfoList =  checkUserService.selectAll();
@@ -100,16 +96,21 @@ public class TestController {
     }
 
 
-    @RequestMapping("/getAll")
+    //分页功能的测试
+    @RequestMapping("getAll")
     public String getAll(ModelMap modelMap, @RequestParam(value = "start",defaultValue = "2") Integer start,
                         @RequestParam(value = "size",defaultValue = "3") int size){
-        //设置分页
+        //设置分页,并且按照ID进行降序排列.(默认查询总数，即select count(0) from xxx)
+//        PageHelper.startPage(start, size,"id desc");
+        //设置分页,不查询总数
+//        PageHelper.startPage(start, size,false);
+        //设置分页，默认查询总数。
         PageHelper.startPage(start, size);
         //获取所有用户信息(因为pageHelper的作用，这里就会返回分页的内容了)
-        List<UserInfo> userInfoList =  checkUserService.getAll();
+        List<UserInfo> userInfoList =  checkUserService.selectAll();
         //根据返回的集合，创建PageInfo对象
         PageInfo<UserInfo> pageInfo = new PageInfo<>(userInfoList);
-        System.out.println("pageInfo.startRow="+pageInfo.getStartRow());
+        System.out.println("pageInfo.pageNum="+pageInfo.getPageNum());
         //将pageInfo对象扔进Model中
         modelMap.addAttribute("userInfoList", pageInfo);
         modelMap.addAttribute("message", "欢迎进入MyBatis，xml方式！");
@@ -118,7 +119,7 @@ public class TestController {
 
 
 
-    @RequestMapping("/exception")
+    @RequestMapping("exception")
     @ResponseBody
     public String testDeployment() throws Exception {
         if(true){

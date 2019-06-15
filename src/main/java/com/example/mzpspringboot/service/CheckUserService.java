@@ -8,6 +8,8 @@ package com.example.mzpspringboot.service;/**
 
 import com.example.mzpspringboot.dao.IUserInfoMapper;
 import com.example.mzpspringboot.model.UserInfo;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,9 +61,14 @@ public class CheckUserService {
     * @Param []
     * @return java.util.List<com.example.mzpspringboot.model.UserInfo>
     **/
-    public List<UserInfo> getAll(){
-        List<UserInfo> list  = userInfoMapper.getAll();
-        return list;
+    public PageInfo<UserInfo> getAll(int start, int size){
+        //设置分页(默认查询总数，即select count(0) from xxx)
+        PageHelper.startPage(start, size);
+        //获取所有用户信息(因为pageHelper的作用，这里就会返回分页的内容了)
+        List<UserInfo> userInfoList =  userInfoMapper.getAll();
+        //根据返回的集合，创建PageInfo对象
+        PageInfo<UserInfo> pageInfo = new PageInfo<>(userInfoList);
+        return pageInfo;
     }
 
     @Transactional

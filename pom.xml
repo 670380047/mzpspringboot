@@ -51,7 +51,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <!--只在编译测试时有效，打包时，不会打包这个依赖-->
+            <!--只在编译测试时有效，打包时，不会打包这个依赖  （用于打成war包时，不打包tomcat）-->
             <scope>provided</scope>
         </dependency>
 
@@ -104,17 +104,17 @@
         </dependency>
 
         <!--===================分页插件 start====================-->
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
-            <version>5.1.2</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.github.pagehelper</groupId>-->
+            <!--<artifactId>pagehelper</artifactId>-->
+            <!--<version>5.1.2</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-autoconfigure</artifactId>
-            <version>1.2.5</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.github.pagehelper</groupId>-->
+            <!--<artifactId>pagehelper-spring-boot-autoconfigure</artifactId>-->
+            <!--<version>1.2.5</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>com.github.pagehelper</groupId>

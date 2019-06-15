@@ -26,6 +26,7 @@ public class GlobalExceptionHandler {
     //比如这里的model，作用范围不再仅仅是自己所在的controller，而是所有的controller中
     @ModelAttribute
     public void addAuthor(Model model){
+        System.out.println("这里是全局异常处理中的@ModelAttribute。author = mzp");
         model.addAttribute("author", "mzp");
     }
 

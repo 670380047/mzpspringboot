@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>主菜单</title>
-    <script type="text/javascript"  src="../js/jquery-3.2.1.js" th:src="@{/js/jquery-3.2.1.js}" ></script>
+    <script type="text/javascript"  src="../js/jquery-3.2.1.js"  th:src="@{/js/jquery-3.2.1.js}"></script>
     <script>
     $(function () {
-        var numTest = $("username")
-        alert(numTest);
+        // alert($("#username").html());
     })
     </script>
 </head>
 <body>
-用户名:<span th:text="${username}"></span> <br/>
+用户名:<span id="username" th:text="${username}"></span> <br/>
 密码:<span th:text="${password}"></span>
     <p th:text="${message}"/>
 <div style="width: 500px;margin: 20px auto;text-align: center">
@@ -31,17 +30,18 @@
             <td th:text="${userInfo.username}">这里是用户名</td>
             <td th:text="${userInfo.password}">这里是密码</td>
             <td th:text="${userInfo.myAge}">这里是年龄</td>
+            <td th:text="${userInfoList.pageNum}">这里是本页的首个行号</td>
             <!--<a th:href="${update}"></a>-->
             <!--<a th:href="">删除</a>-->
         </tr>
     </table>
     <br/>
-    <div>
-        <a href="getAll?start=1">[首页]</a>
-        <a href="getAll?start=${userInfoList.startRow+1}">上一页</a>
-        <a href="getAll?start=${userInfoList.endRow+1}">下一页</a>
-        <a href="getAll?start=${userInfoList.pages}">[首页]</a>
-    </div>
+    <!--<div>-->
+        <a th:href="@{getAll(start=1)}">[首页]</a>
+        <a th:href="@{getAll(start=${userInfoList.pageNum-1})}">上一页</a>
+        <a th:href="@{getAll(start=${userInfoList.pageNum+1})}">下一页</a>
+        <a th:href="@{getAll(start=${userInfoList.pages})}">[尾页]</a>
+    <!--</div>-->
 </div>
 </body>
 </html>
