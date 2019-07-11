@@ -58,4 +58,14 @@ public class UserInfo {
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", myAge=" + myAge +
+                '}';
+    }
 }

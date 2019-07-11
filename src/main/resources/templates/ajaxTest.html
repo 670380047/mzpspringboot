@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript"  src="../js/jquery-3.2.1.js"  th:src="@{/js/jquery-3.2.1.js}"></script>
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function mzpTest() {
+        var urlName = "urlNameTest";
+        var url = "queryTest?urlName="+urlName;
+        var obj = {"username":"mzp","password":"123","myAge":24}
+
+        $.ajax({
+            url:url,
+            type:'POST',
+            dataType:'JSON',
+            data:JSON.stringify(obj),
+            contentType:'application/json;charset=utf-8',
+            success:function (result) {
+                alert(JSON.stringify(result))
+                // alert("请求成功")
+            },
+            error:function (msg) {
+                // alert(msg)
+                alert("请求失败")
+            }
+        });
+    }
+</script>
+<div>
+    测试数据：<br/>
+    <input type="button" value="提交" onclick="mzpTest()">
+</div>
+</body>
+</html>
