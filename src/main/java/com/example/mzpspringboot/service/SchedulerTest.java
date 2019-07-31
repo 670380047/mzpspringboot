@@ -20,7 +20,7 @@ import java.util.Date;
  */
 @Component
 public class SchedulerTest {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     @Scheduled(cron = "2 */1 * * * *")
     public void cronTest(){
         System.out.println("定时任务执行："+sdf.format(new Date()));

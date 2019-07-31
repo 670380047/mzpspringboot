@@ -1,9 +1,9 @@
 package com.example.mzpspringboot;
 
+import cn.hutool.core.util.NetUtil;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -19,8 +19,13 @@ public class MzpspringbootApplication  extends SpringBootServletInitializer {
 	private static Logger logger = LoggerFactory.getLogger(MzpspringbootApplication.class);
 
 	public static void main(String[] args)  {
-		SpringApplication.run(MzpspringbootApplication.class, args);
+//		SpringApplication.run(MzpspringbootApplication.class, args);
 //		System.out.println("项目启动成功。。。。。");
+		int port = 8080;
+		if(!NetUtil.isUsableLocalPort(port)){
+			logger.info("端口"+port+"已被占用，项目启动失败。。。。。");
+		}
+		new SpringApplicationBuilder(MzpspringbootApplication.class).properties("server.port=" + port).run(args);
 		logger.info("项目启动成功。。。。。");
 		}
 
