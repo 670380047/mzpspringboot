@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +36,8 @@ public class TestController {
     CheckUserService checkUserService;
     @Autowired
     IUserInfoDao userInfoDao;
+
+    HttpSession session;
 
 
 
@@ -61,7 +64,9 @@ public class TestController {
                 //mybatis
             //PageInfo<UserInfo> pageInfo = checkUserService.getAll(0,3);
             //map.put("userInfoList", pageInfo);
-            map.put("message","登陆成功");
+            //把信息存在session中。因为页面跳转时用了重定向，request的内容丢失，使用session可避免丢失。
+            session = request.getSession();
+            session.setAttribute("myInfo",map);
             return "redirect:getAll?start=1";
         }
         map.put("message","用户名密码不正确");
@@ -113,7 +118,9 @@ public class TestController {
         System.out.println("pageInfo.pageNum="+pageInfo.getPageNum());
         //将pageInfo对象扔进Model中
         modelMap.addAttribute("userInfoList", pageInfo);
-        modelMap.addAttribute("message", "欢迎进入MyBatis，xml方式！");
+        modelMap.addAttribute("message", "登陆成功，欢迎进入MyBatis，xml方式！");
+
+        modelMap.addAllAttributes((Map)session.getAttribute("myInfo"));
         return "main";
     }
 

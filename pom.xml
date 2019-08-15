@@ -30,7 +30,7 @@
             -->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <!--移除嵌入式tomcat插件（因为要使用外部的tomcat）-->
+            <!--移除嵌入式tomcat插件（因为要使用外部的tomcat.）-->
             <!--<exclusions>-->
                 <!--<exclusion>-->
                     <!--<groupId>org.springframework.boot</groupId>-->
