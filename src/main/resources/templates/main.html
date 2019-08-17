@@ -11,8 +11,10 @@
     </script>
 </head>
 <body>
-用户名:<span id="username" th:text="${username}"></span> <br/>
-密码:<span th:text="${password}"></span>
+<!-- th:if  如果为假，则后面的text就不会去执行，避免了空指针-->
+用户名:<span id="username" th:if="${session.myInfo != null}"   th:text="${session.myInfo.username}" ></span> <br/>
+密码:<span  id="password" th:if="${session.myInfo != null}" th:text="${session.myInfo.password}" ></span><br/>
+session值:<span id="session"  th:if="${session != null}" th:text="${session.myInfo}" ></span>
     <p th:text="${message}"/>
 
 <div style="width: 500px;margin: 20px auto;text-align: center">
@@ -31,7 +33,7 @@
             <td th:text="${userInfo.username}">这里是用户名</td>
             <td th:text="${userInfo.password}">这里是密码</td>
             <td th:text="${userInfo.myAge}">这里是年龄</td>
-            <td th:text="${userInfoList.pageNum}">这里是本页的首个行号</td>
+            <td th:text="${userInfoList.pageNum}">这里是本页的页码</td>
             <!--<a th:href="${update}"></a>-->
             <!--<a th:href="">删除</a>-->
         </tr>

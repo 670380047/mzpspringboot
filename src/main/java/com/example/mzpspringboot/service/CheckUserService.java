@@ -8,6 +8,7 @@ package com.example.mzpspringboot.service;/**
 
 import com.example.mzpspringboot.dao.IUserInfoMapper;
 import com.example.mzpspringboot.model.UserInfo;
+import com.example.mzpspringboot.util.StringUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -34,10 +35,24 @@ public class CheckUserService {
     public boolean checkUser(Map map){
         String username = (String) map.get("username");
         String password = (String) map.get("password");
-        if("mzp".equals(username) && "123".equals(password)){
-            return true;
-        }
+        if(!StringUtil.isEmpty(username)){
+            String temPwd = userInfoMapper.getByUserName(username);
+            //密码没找到
+            if(StringUtil.isEmpty(temPwd)){
+                return false;
+            }else {
+                if(temPwd.equals(password)){
+                    //密码正确
+                    return true;
+                }else{
+                    //密码找到，但不正确
+                    return false;
+                }
+            }
+        }else{
+            //用户名为空
             return false;
+        }
     }
 
     /**
@@ -48,9 +63,9 @@ public class CheckUserService {
     * @return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
     **/
 
-    public List<UserInfo> selectAll(){
+    public List<UserInfo> getAll(){
         List<UserInfo> list  = null;
-              list  = userInfoMapper.selectAll();
+              list  = userInfoMapper.getAll();
         return list;
     }
 
@@ -61,11 +76,16 @@ public class CheckUserService {
     * @Param []
     * @return java.util.List<com.example.mzpspringboot.model.UserInfo>
     **/
-    public PageInfo<UserInfo> getAll(int start, int size){
+    public PageInfo<UserInfo> selectAll(int start, int size){
+        //设置分页,并且按照ID进行降序排列.(默认查询总数，即select count(0) from xxx)
+//        PageHelper.startPage(start, size,"id desc");
+        //设置分页,不查询总数
+//        PageHelper.startPage(start, size,false);
+
         //设置分页(默认查询总数，即select count(0) from xxx)
         PageHelper.startPage(start, size);
         //获取所有用户信息(因为pageHelper的作用，这里就会返回分页的内容了)
-        List<UserInfo> userInfoList =  userInfoMapper.getAll();
+        List<UserInfo> userInfoList =  userInfoMapper.selectAll();
         //根据返回的集合，创建PageInfo对象
         PageInfo<UserInfo> pageInfo = new PageInfo<>(userInfoList);
         return pageInfo;
@@ -76,6 +96,8 @@ public class CheckUserService {
         int flag;
         try {
             flag = userInfoMapper.insertUserInfo(userInfo);
+            System.out.println("userInfo对应的自增长的ID="+userInfo.getId());
+//            int n = 1/0;
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("数据插入错误。。。。。数据回滚");

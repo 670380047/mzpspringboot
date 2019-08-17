@@ -5,6 +5,10 @@
         select  id,username,my_age myAge , password from user_info
     </select>
 
+    <select id="getByUserName" parameterType="java.lang.String" resultType="java.lang.String">
+        select password from user_info where username = #{username}
+    </select>
+
     <!--useGeneratedKeys="true"   用于使用jdbc的getGeneratedKeys 来获取自增长的主键-->
     <insert id="insertUserInfo" parameterType="userInfo" useGeneratedKeys="true">
         insert into user_info

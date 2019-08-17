@@ -37,11 +37,11 @@ public class TestController {
     @Autowired
     IUserInfoDao userInfoDao;
 
-    HttpSession session;
+    HttpSession  session;
 
 
 
-    @RequestMapping("index")
+    @RequestMapping("index1")
     @ResponseBody
     public UserInfo index(){
         System.out.println("进入index");
@@ -76,6 +76,7 @@ public class TestController {
 
     @RequestMapping("insert")
     public String insert(UserInfo userInfo){
+        System.out.println(userInfo);
         checkUserService.insertUserInfo(userInfo);
         return "redirect:getAll";
     }
@@ -88,13 +89,10 @@ public class TestController {
 
 
 
-
-
-
     @RequestMapping("selectAll")
     public String selectAll(ModelMap modelMap){
         //获取所有用户信息
-        List<UserInfo> userInfoList =  checkUserService.selectAll();
+        PageInfo<UserInfo> userInfoList =  checkUserService.selectAll(2,3);
         modelMap.addAttribute("userInfoList", userInfoList);
         modelMap.addAttribute("message", "欢迎进入MyBatis， 注解方式！");
         return "main";
@@ -103,7 +101,7 @@ public class TestController {
 
     //分页功能的测试
     @RequestMapping("getAll")
-    public String getAll(ModelMap modelMap, @RequestParam(value = "start",defaultValue = "2") Integer start,
+    public String getAll(ModelMap modelMap, @RequestParam(value = "start",defaultValue = "1") Integer start,
                         @RequestParam(value = "size",defaultValue = "3") int size){
         //设置分页,并且按照ID进行降序排列.(默认查询总数，即select count(0) from xxx)
 //        PageHelper.startPage(start, size,"id desc");
@@ -112,7 +110,7 @@ public class TestController {
         //设置分页，默认查询总数。
         PageHelper.startPage(start, size);
         //获取所有用户信息(因为pageHelper的作用，这里就会返回分页的内容了)
-        List<UserInfo> userInfoList =  checkUserService.selectAll();
+        List<UserInfo> userInfoList =  checkUserService.getAll();
         //根据返回的集合，创建PageInfo对象
         PageInfo<UserInfo> pageInfo = new PageInfo<>(userInfoList);
         System.out.println("pageInfo.pageNum="+pageInfo.getPageNum());
@@ -120,7 +118,7 @@ public class TestController {
         modelMap.addAttribute("userInfoList", pageInfo);
         modelMap.addAttribute("message", "登陆成功，欢迎进入MyBatis，xml方式！");
 
-        modelMap.addAllAttributes((Map)session.getAttribute("myInfo"));
+//        modelMap.addAllAttributes((Map)session.getAttribute("myInfo"));
         return "main";
     }
 

@@ -18,6 +18,7 @@ public interface IUserInfoMapper {
 
     //======================xml方式==========================
     List<UserInfo> getAll();
+    String getByUserName(String userName);
 
     int insertUserInfo(UserInfo userInfo);
 

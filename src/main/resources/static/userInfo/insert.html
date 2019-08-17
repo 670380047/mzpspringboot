@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户新增</title>
+    <script type="text/javascript"  src="../js/jquery-3.2.1.js"  th:src="@{/js/jquery-3.2.1.js}"></script>
+    <script>
+        // 加载dom
+        $(function () {
+            //和外部function同名时，这里的这个优先级高
+            $("#reset").click(function () {
+                $("#username").val("");
+                $("#password").val("");
+                $("#age").val("");
+            })
+        })
+
+        function getfocus() {
+            $("#username").val("");
+        }
+    </script>
+</head>
+<body>
+        <!--action中加了/的话，就是从根目录开始。  不加的话，就是从当前目录的上一级开始，只是把当前目录替换成action中的-->
+    <form method="post" action="/insert">
+        <span>用户名：<input id="username" name="username" type="text" value="请输入用户名" onfocus="getfocus()"/></span><br/>
+        <span>密码：<input id="password" name="password" type="text"/></span><br/>
+        <span>年龄：<input id="age" name="myAge" type="text"/></span><br/>
+        <input id="submit" type="submit" value="注册">
+        <input id="reset" type="button" value="重置">
+    </form>
+</body>
+</html>
