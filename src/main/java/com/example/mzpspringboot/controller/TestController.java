@@ -77,7 +77,9 @@ public class TestController {
     @RequestMapping("insert")
     public String insert(UserInfo userInfo){
         System.out.println(userInfo);
+        System.out.println("测试获取自增长序列(sql执行之前)：ID="+userInfo.getId());
         checkUserService.insertUserInfo(userInfo);
+        System.out.println("测试获取自增长序列（sql执行之后）：ID="+userInfo.getId());
         return "redirect:getAll";
     }
 

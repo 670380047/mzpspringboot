@@ -15,7 +15,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <!--项目名称，maven生成文档时使用-->
     <name>mzpspringboot</name>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <description>Demo project for Spring Boot</description>
 
 
