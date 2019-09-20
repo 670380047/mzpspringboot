@@ -194,7 +194,6 @@ public class PasswordUtil {
         try {
 
             String ciphertext = PasswordUtil.encrypt(str, password);
-
             System.out.println(ciphertext);
             String plaintext = PasswordUtil.decrypt(ciphertext, password);
             System.out.println(plaintext);

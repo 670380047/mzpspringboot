@@ -15,7 +15,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <!--项目名称，maven生成文档时使用-->
     <name>mzpspringboot</name>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <description>Demo project for Spring Boot</description>
 
 
@@ -81,6 +81,13 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>4.3.1</version>
+        </dependency>
+
+        <!-- jedis：redis的java客户端 -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>3.0.1</version>
         </dependency>
         <!--===========================自己导入的依赖  end===============================-->
 
