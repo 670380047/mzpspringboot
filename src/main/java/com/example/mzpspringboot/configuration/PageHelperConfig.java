@@ -8,18 +8,27 @@ package com.example.mzpspringboot.configuration;/**
 
 import com.github.pagehelper.PageHelper;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.Properties;
 
 /**
+ *  如果引入的是springboot版本的  pagehelper，那么就不需要再写下面的pageHelper()  方法了。
+ *          <dependency>
+ *             <groupId>com.github.pagehelper</groupId>
+ *             <artifactId>pagehelper-spring-boot-starter</artifactId>
+ *             <version>1.2.5</version>
+ *         </dependency>
  *
  * @Author maozp3
  * @Description: 分页配置类
  * @Date: 2019/6/4 13:57
  */
 //@Configuration，表名这个类使用来做配置的。相当于spring的xml里面的<beans>标签
-//@Configuration
+@Configuration
 public class PageHelperConfig {
+
+    //如果引入的是springboot版本的  pagehelper，那么就不需要再写下面的pageHelper()  方法了。
 
     //@Bean 表名这是一个bean，交给容器管理。相当于spring的xml里面的<bean>标签
     @Bean
