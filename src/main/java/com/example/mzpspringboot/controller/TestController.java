@@ -12,6 +12,7 @@ import com.example.mzpspringboot.service.CheckUserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,9 @@ public class TestController {
 
     HttpSession  session;
 
+
+    @Value("${server.port}")   //@Value支持字面量赋值，但是不支持松散语法（@ConfigurationProperties支持）
+    String port;
 
 
     @RequestMapping("index1")
@@ -134,4 +138,12 @@ public class TestController {
         }
         return "Spring Boot热部署";
     }
+
+    @RequestMapping("port")
+    @ResponseBody
+    public String testPort() throws Exception {
+        System.out.println(port);
+        return port;
+    }
+
 }

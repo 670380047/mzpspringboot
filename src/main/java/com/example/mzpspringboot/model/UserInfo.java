@@ -26,15 +26,8 @@ public class UserInfo {
     private String username;
     private String password;
     private Integer myAge;
-    /**
-     * usernameTest : mzp
-     * passwordTest : 123
-     * ageTest : 24
-     */
 
-    private String usernameTest;
-    private String passwordTest;
-    private int ageTest;
+
 
     public String getUsername() {
         return username;

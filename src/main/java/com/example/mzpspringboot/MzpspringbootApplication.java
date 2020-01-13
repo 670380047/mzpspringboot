@@ -18,6 +18,8 @@ public class MzpspringbootApplication  extends SpringBootServletInitializer {
 
 	private static Logger logger = LoggerFactory.getLogger(MzpspringbootApplication.class);
 
+
+
 	public static void main(String[] args)  {
 
 		/*
@@ -34,13 +36,14 @@ public class MzpspringbootApplication  extends SpringBootServletInitializer {
 		application.run(args);
 		*/
 
-		int port = 8080;
+		Integer port = 8080;
+        System.out.println("端口："+port);
 		if(!NetUtil.isUsableLocalPort(port)){
 			logger.info("端口"+port+"已被占用，项目启动失败。。。。。");
 		}
 
 		new SpringApplicationBuilder(MzpspringbootApplication.class).properties("server.port=" + port).run(args);
-		logger.info("项目启动成功。。。。。");
+		logger.info(",项目启动成功。。。。。");
 		}
 
 //(注意！！！  要么在启动类里面写，要么独立出一个类来写，二选其一。否则就会使资源加载两次。出现项目启动两次(出现两个banner)，分页插件出现两个的问题)

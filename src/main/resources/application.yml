@@ -1,0 +1,44 @@
+# yml 语法
+# 1. yml配置需要再":"后面加一个空格
+# 2. ""：双引号；不会转义字符串里面的特殊字符；特殊字符会作为本身想表示的意思（比如\n就是换行） name: "zhangsan \n lisi"；输出：zhangsan 换行 lisi
+#    ''：单引号；会转义特殊字符，特殊字符最终被转义为一个普通的字符串数据（比如\n失效了） name: ‘zhangsan \n lisi’：输出；zhangsan \n lisi
+
+# yml文件支持多文档,用于多文档切换。  语法3个横杠：  ---
+
+person:
+  name: 小明${random.uuid}
+  age: 24
+  isBoss: false
+  birth: 1995/01/05
+  maps:
+    k1: v1
+    v1: v1
+  parents:
+    - name: ${person.name:默认值}小华   # 如果person.name没有配置，则会使用冒号后面的默认值
+      age: 50
+      isBoss: true
+      birth: 1969/06/06
+    - name: 小李
+      age: 49
+      isBoss: false
+      birth: 1970/07/07
+spring:
+  profiles:
+    active: dev   #选择激活dev环境（如果为空，那默认就是使用当前文档）
+server:
+  port: 8081
+
+---
+#文档2
+spring:
+  profiles: prod
+server:
+  port: 8082
+
+---
+#文档3
+spring:
+  profiles: dev
+server:
+  port: 8083
+
