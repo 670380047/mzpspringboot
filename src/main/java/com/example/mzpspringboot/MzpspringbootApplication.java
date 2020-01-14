@@ -37,7 +37,6 @@ public class MzpspringbootApplication  extends SpringBootServletInitializer {
 		*/
 
 		Integer port = 8080;
-        System.out.println("端口："+port);
 		if(!NetUtil.isUsableLocalPort(port)){
 			logger.info("端口"+port+"已被占用，项目启动失败。。。。。");
 		}

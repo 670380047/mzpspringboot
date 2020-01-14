@@ -5,6 +5,9 @@
 
 # yml文件支持多文档,用于多文档切换。  语法3个横杠：  ---
 
+# debug: true   开启springboot的debug模式（默认是关闭的false）。  比如可以查看哪些自动配置类被加载了
+#debug: true
+
 person:
   name: 小明${random.uuid}
   age: 24
@@ -27,7 +30,6 @@ spring:
     active: dev   #选择激活dev环境（如果为空，那默认就是使用当前文档）
 server:
   port: 8081
-
 ---
 #文档2
 spring:
