@@ -35,7 +35,6 @@ public class MzpspringbootApplication  extends SpringBootServletInitializer {
 		//application.setBannerMode(Banner.Mode.OFF);
 		application.run(args);
 		*/
-
 		Integer port = 8080;
 		if(!NetUtil.isUsableLocalPort(port)){
 			logger.info("端口"+port+"已被占用，项目启动失败。。。。。");
