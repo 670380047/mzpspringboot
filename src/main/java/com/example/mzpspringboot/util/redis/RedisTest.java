@@ -52,9 +52,9 @@ public class RedisTest {
 
 //        redisTest.getAllTypeValues(keys);
 //
-//        redisTest.getExactTypeValues("String",keys);
-//        redisTest.getExactTypeValues("hash",keys);
-//        redisTest.getExactTypeValues("list",keys);
+        redisTest.getExactTypeValues("String",keys);
+        redisTest.getExactTypeValues("hash",keys);
+        redisTest.getExactTypeValues("list",keys);
         redisTest.getExactTypeValues("set",keys);
         redisTest.getExactTypeValues("zset",keys);
         //关闭redis链接
