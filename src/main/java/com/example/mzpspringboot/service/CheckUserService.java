@@ -94,8 +94,7 @@ public class CheckUserService {
     @Transactional
     public int insertUserInfo(UserInfo userInfo){
         // spring事务管理@Transactional  这里不需要做  try .... catch。  否则事务捕获不到异常。
-        int flag;
-            flag = userInfoMapper.insertUserInfo(userInfo);
+        int  flag = userInfoMapper.insertUserInfo(userInfo);
             System.out.println("userInfo对应的自增长的ID="+userInfo.getId());
             int n = 1/0;
         return  flag;
