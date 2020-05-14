@@ -1,5 +1,7 @@
 package com.example.mzpspringboot.dao;
 
+import com.example.mzpspringboot.model.Role;
+import com.example.mzpspringboot.model.User;
 import com.example.mzpspringboot.model.UserInfo;
 import org.apache.ibatis.annotations.Select;
 
@@ -19,6 +21,13 @@ public interface IUserInfoMapper {
     //======================xml方式==========================
     List<UserInfo> getAll();
     String getByUserName(String userName);
+
+    // security权限验证：获取用户
+    List<User> getUserByUserName(String userName);
+    // security权限验证：获取用户角色
+    List<Role> getUserRolesById(int id);
+
+
 
     int insertUserInfo(UserInfo userInfo);
 

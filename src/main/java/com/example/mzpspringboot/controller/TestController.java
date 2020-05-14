@@ -13,6 +13,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,12 +33,14 @@ import java.util.Map;
  * @Date: 2019/4/10 14:44
  */
 @Controller
-@RequestMapping
+@RequestMapping("main")
 public class TestController {
     @Autowired
     CheckUserService checkUserService;
     @Autowired
     IUserInfoDao userInfoDao;
+
+
 
     HttpSession  session;
 
@@ -61,7 +65,7 @@ public class TestController {
     public String hello(HttpServletRequest request, Map map){
         map.put("username",request.getParameter("username"));
         map.put("password",request.getParameter("password"));
-        if(checkUserService.checkUser(map)){
+//        if(checkUserService.checkUser(map)){}
             System.out.println("进入主页。。。。。。");
                 //jpa
             //List<UserInfo> userInfoList = userInfoDao.findAll();
@@ -72,15 +76,23 @@ public class TestController {
             session = request.getSession();
             session.setAttribute("myInfo",map);
             return "redirect:getAll?start=1";
-        }
-        map.put("message","用户名密码不正确");
-        return "login";
+
+//        map.put("message","用户名密码不正确");
+//        return "login";
 
     }
 
     @RequestMapping("insert")
     public String insert(UserInfo userInfo){
-        System.out.println(userInfo);
+        /**
+         * spring security 自带的加密算法： bCryptPasswordEncoder.encode("明文密码")
+         */
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        System.out.println("加密前："+userInfo);
+        String password = userInfo.getPassword();   // 取出明文
+        String encodedPassword =  passwordEncoder.encode(password);   // 加密
+        userInfo.setPassword(encodedPassword);  // 将密文放入实体类中，存入数据库
+        System.out.println("加密后："+userInfo);
         System.out.println("测试获取自增长序列(sql执行之前)：ID="+userInfo.getId());
         checkUserService.insertUserInfo(userInfo);
         System.out.println("测试获取自增长序列（sql执行之后）：ID="+userInfo.getId());
