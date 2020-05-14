@@ -12,6 +12,8 @@ import com.example.mzpspringboot.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,6 +43,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private SuccessAuthenticationHandler successHandler;        //登录验证成功的逻辑
+
+    /**
+     * 角色关系的层级。可是实现角色权限的继承。比如下面 ROLE_dba会拥有三个角色的权限
+     * @return
+     */
+    @Bean
+    RoleHierarchy roleHierarchy(){
+        /**
+         * RoleHierarchyImpl类中有两个展示权限的字段。
+         *      rolesReachableInOneStepMap：展示出所有的“直系上下级关系”（如果有下级单位，就在这里面会展示。没有下级，就不显示）
+         *      rolesReachableInOneOrMoreStepsMap：展示某个角色的“所有下属关系”，不止直系，是所有的下属，也就是展示“他所拥有的包含他自己在内的那些角色的权限”
+         */
+        RoleHierarchyImpl roleHierarchy  = new RoleHierarchyImpl();
+        String hierarchy = "ROLE_dba > ROLE_admin  ROLE_admin > ROLE_user ROLE_admin > ROLE_inst  ROLE_ha1 > ROLE_haha2 ROLE_user>ROLE_haha2";
+        roleHierarchy.setHierarchy(hierarchy);
+        return roleHierarchy;
+    }
 
     /**
      * 获取数据库的用户名和密码
