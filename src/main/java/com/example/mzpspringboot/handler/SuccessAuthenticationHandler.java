@@ -29,9 +29,13 @@ public class SuccessAuthenticationHandler implements AuthenticationSuccessHandle
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         log.info("SuccessAuthenticationHadler ==> 登录成功");
-        // 这里可以获取用户的登录信息。
+        // 这里可以获取用户的登录信息。方法一
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(user);
+        // 这两行是一样的效果。 方法二
+//        User user1 = (User) authentication.getPrincipal();
+//        System.out.println(user);
+
+
         httpServletResponse.sendRedirect(httpServletRequest.getContextPath()+"/main/welcome");
     }
 }

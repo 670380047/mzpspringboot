@@ -81,7 +81,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * 读取用户名密码，并且加密
+     * 指定自定义的detailsService，即这里的UserDetailsServiceImpl实现类，并且指定加密方式为createPasswordEncoder(),即BCryptPasswordEncoder()
+     *      读取用户名密码，并且加密
      * @param auth
      * @throws Exception
      */
@@ -92,13 +93,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        super.configure(http);
-        http.authorizeRequests()
+        // 基于token，所以不需要session
+//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+
+        http.authorizeRequests()  //开启HttpSecurity配置
                     .antMatchers("/loginController","/myError/**").permitAll()  //这些路径页面不拦截，放行
                     .antMatchers("/admin/**").hasRole("admin") //访问这个admin路径下的所有资源都需要admin权限
                     .antMatchers("/dba/**").hasRole("dba")
-                    .antMatchers("/user/**").hasRole("user")
-                    .antMatchers("/main/**").hasRole("admin")
+                    .antMatchers("/user/**").access("hasRole('admin') and hasRole('user')") //访问/user下面的路径 “同时需要”admin和user两种角色的权限
+                    .antMatchers("/main/**").access("hasAnyRole('dba','admin','user')")    //访问/main下面的路径需要dba 或 admin角色的权限。 配置了角色层级关系之后，实际这里可以只写user，因为dba和admin是user的上级
     //                .antMatchers("/**")
     //                .fullyAuthenticated()
                     .anyRequest().authenticated() //用户访问其它URL都必须认证后访问（登录后访问）

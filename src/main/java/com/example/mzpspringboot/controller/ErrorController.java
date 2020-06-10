@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 错误页面跳转。 由MyErrorPages 类跳转过来的
+ * 错误页面跳转。 由 MyErrorPages 类跳转过来的
  * @Description:
  * @Author maozp3
  * @Date: 2020/5/13 17:02
@@ -21,11 +21,11 @@ public class ErrorController {
 
     @RequestMapping("/403")
     public String forbidden(){
-        return "/error/403";
+        return "/myError/403";
     }
 
     @RequestMapping("/404")
     public String notFound(){
-        return "/error/404";
+        return "/myError/404";
     }
 }
