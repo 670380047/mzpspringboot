@@ -54,7 +54,6 @@ public class TestController {
     @RequestMapping("index1")
     @ResponseBody
     public UserInfo index(){
-        int a = 1/0;
         System.out.println("进入index");
         UserInfo userInfo = new UserInfo();
         userInfo.setUsername("毛宗鹏");

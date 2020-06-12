@@ -23,6 +23,7 @@ public class PageTestController {
 
     @RequestMapping("/loginController")
     public String login(Model model){
+//        int a = 1/0;
 //       UserInfo userInfo  = new UserInfo();
 //       userInfo.setUsername("小明");
 //       userInfo.setPassword("123");
