@@ -15,7 +15,7 @@ import redis.clients.jedis.Tuple;
 import java.util.Set;
 
 /**
- *
+ *  在本机测试。
  * @author maozp3
  * @description:
  * @date: 2019/9/6 11:38

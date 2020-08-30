@@ -41,7 +41,7 @@ public class GlobalExceptionHandler {
         model.addAttribute("url", request.getRequestURL());
 
         /**
-         * 1.为了能跳转到自定义的500.html页面中去
+         * 1.为了能跳转到自定义的500.html页面中去。 状态码要写500，并且在引擎（templates）下面有一个error/500.html的页面
          */
         request.setAttribute("javax.servlet.error.status_code",500);
         /**

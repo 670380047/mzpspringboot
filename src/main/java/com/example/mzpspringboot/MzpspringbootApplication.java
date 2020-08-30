@@ -21,7 +21,6 @@ public class MzpspringbootApplication  extends SpringBootServletInitializer {
 
 
 	public static void main(String[] args)  {
-
 		/*
 		//启动 方法一。
 		SpringApplication.run(MzpspringbootApplication.class, args);

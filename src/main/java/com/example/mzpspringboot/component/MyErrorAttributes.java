@@ -13,7 +13,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.Map;
 
 /**
- * 自定义的MyErrorAttributes，继承自 DefaultErrorAttributes(简单，只用重写一个方法)      也可以实现  ErrorAttributes接口。
+ * 自定义的MyErrorAttributes，继承自 DefaultErrorAttributes(简单，只用重写一个方法，其他方法好用父类的)。  也可以实现  ErrorAttributes接口（复杂，需要重写方法太多）。
  *      这样就会覆盖掉springboot的自动配置了，因为自动配置使用了
  *          @ConditionalOnMissingBean(value = ErrorAttributes.class, search = SearchStrategy.CURRENT)
  *          因为DefaultErrorAttributes是ErrorAttributes接口的实现类，所以继承这个类，也可以覆盖自动配置

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * 拦截器的配置类。配置选择“拦截器”以及“配置拦截路径”
+ * 拦截器的配置类。配置选择“拦截器”以及“配置拦截路径”。需要实现WebMvcConfigurer接口
  * @Description:
  * @Author maozp3
  * @Date: 2020/5/12 16:33
