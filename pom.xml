@@ -15,7 +15,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <!--项目名称，maven生成文档时使用-->
     <name>mzpspringboot</name>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <description>Demo project for Spring Boot</description>
 
 
@@ -88,6 +88,19 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>3.0.1</version>
+        </dependency>
+
+        <!-- lettuce：springboot2.0以后默认的redis的java客户端 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!--阿里的fastJson-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
         </dependency>
         <!--===========================自己导入的依赖  end===============================-->
 

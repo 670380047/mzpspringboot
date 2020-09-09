@@ -1,4 +1,4 @@
-package com.example.mzpspringboot.util.redis;/**
+package com.example.mzpspringboot.util.redis.jedis;/**
  * @version: java version 1.7+
  * @Author : mzp
  * @Time : 2019/9/6 11:38

@@ -1,14 +1,19 @@
-package com.example.mzpspringboot.util.redis;
+package com.example.mzpspringboot.util.redis.jedis;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisShardInfo;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
+ * jedis测试。从jedisPool链接池中获取链接【getSource()】
+ *
  * @version: java version 1.7+
  * @Author : mzp
  * @Time : 2020/8/28 17:26
@@ -21,16 +26,32 @@ public class RedisLinux {
 
 
     public static void main(String[] args) {
+        //jedis配置
         JedisPoolConfig redisConfig = new JedisPoolConfig();
         redisConfig.setMaxIdle(1000); // 设置值最大空闲时间
         redisConfig.setMaxWaitMillis(1000); // 设置最大等待时间
         redisConfig.setMaxTotal(500); // 设置redis池中最大对象个数
 
-        JedisShardInfo shadInfo = new JedisShardInfo("192.168.56.128",6379);
+        //jedis链接
+        JedisShardInfo shardInfo = new JedisShardInfo("192.168.56.128",6379);
+//        JedisShardInfo shardInfo1 = new JedisShardInfo("192.168.56.128",6380);
 
+//        List<JedisShardInfo> shardInfos = new ArrayList<>();
+//        shardInfos.add(shardInfo);
+//
+//        ShardedJedisPool pool = new ShardedJedisPool(redisConfig,shardInfo);
+//        ShardedJedis jedis = pool.getResource();
 
+        String host = "192.168.56.128";
+        int port = 6379;
+        //单个jedis启动（因为jedis是单例的，多线程时需要用连接池）
+//        Jedis jedis = new Jedis(host,port);
+        // 根据配置文件、host、port来配置链接池（因为jedis是单例的，多线程时可以用连接池）
+        JedisPool jedisPool = new JedisPool(redisConfig,host,port);
 
-        Jedis  jedis = new Jedis(shadInfo);
+        // 从连接池中获取redis链接
+        Jedis  jedis = jedisPool.getResource();
+
         jedis.auth("mzp");
         System.out.println(jedis.keys("*"));
         String mzp = jedis.get("mzp");
@@ -57,6 +78,23 @@ public class RedisLinux {
         System.out.println(object1);
         Object object2 = undoSerialize(result2);
         System.out.println(object2);
+
+        System.out.println("==============redis使用Hash保存对象==============");
+        Map<byte[],byte[]> redisMap = new HashMap<>();
+        redisMap.put("redisBean1".getBytes(),bytes1);
+        redisMap.put("redisBean2".getBytes(),bytes2);
+        jedis.hmset("hmset".getBytes(),redisMap);
+        Map<byte[], byte[]> map = jedis.hgetAll("hmset".getBytes());
+        System.out.println("hmset里面存储的两个对象："+map);
+        System.out.println("把hmset里面的对象，反序列化出来："+undoSerialize(map.get("redisBean1".getBytes())));
+
+        Map<String,String> stringMap = new HashMap<>();
+        stringMap.put("name","mzp");
+        stringMap.put("age","18");
+        jedis.hmset("hset",stringMap);
+        Map<String, String> hset = jedis.hgetAll("hset");
+        System.out.println("hset里面存储的是两个字符串："+hset);
+
     }
 
     /**

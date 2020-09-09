@@ -1,4 +1,4 @@
-package com.example.mzpspringboot.util.redis;
+package com.example.mzpspringboot.util.redis.jedis;
 
 import java.io.Serializable;
 
