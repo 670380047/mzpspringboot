@@ -8,9 +8,9 @@ package com.example.mzpspringboot.service;/**
 
 import com.example.mzpspringboot.dao.IUserInfoMapper;
 import com.example.mzpspringboot.model.UserInfo;
-import com.example.mzpspringboot.util.StringUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
