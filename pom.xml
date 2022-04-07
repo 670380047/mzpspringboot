@@ -15,7 +15,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <!--项目名称，maven生成文档时使用-->
     <name>mzpspringboot</name>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <description>Demo project for Spring Boot</description>
 
 
@@ -32,18 +32,18 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <!--移除嵌入式tomcat插件（因为要使用外部的tomcat.）-->
             <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.springframework.boot</groupId>-->
-                    <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
-                <!--</exclusion>-->
+            <!--<exclusion>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+            <!--</exclusion>-->
             <!--</exclusions>-->
 
             <!--移除logging日志。使用下面添加的log4j2-->
             <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.springframework.boot</groupId>-->
-                    <!--<artifactId>spring-boot-starter-logging</artifactId>-->
-                <!--</exclusion>-->
+            <!--<exclusion>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-logging</artifactId>-->
+            <!--</exclusion>-->
             <!--</exclusions>-->
         </dependency>
 
@@ -57,9 +57,9 @@
 
         <!--部署到外部Tomcat时使用，因为打成war包需要servlet。导入servlet。 也可以用直接导入tomcat-->
         <!--<dependency>-->
-            <!--<groupId>javax.servlet</groupId>-->
-            <!--<artifactId>javax.servlet-api</artifactId>-->
-            <!--<scope>provided</scope>-->
+        <!--<groupId>javax.servlet</groupId>-->
+        <!--<artifactId>javax.servlet-api</artifactId>-->
+        <!--<scope>provided</scope>-->
         <!--</dependency>-->
 
         <dependency>
@@ -71,9 +71,9 @@
         <!--===========================自己导入的依赖  start===============================-->
         <!--logback日志依赖 可以不加。因为spring-boot-starter-web已经依赖于它-->
         <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-logging</artifactId>-->
-            <!--<version>2.0.5.RELEASE</version>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-logging</artifactId>-->
+        <!--<version>2.0.5.RELEASE</version>-->
         <!--</dependency>-->
 
         <!--可以用来指定启动的端口-->
@@ -81,6 +81,26 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>4.3.1</version>
+        </dependency>
+
+        <!-- jedis：redis的java客户端 -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
+        <!-- lettuce：springboot2.0以后默认的redis的java客户端 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!--阿里的fastJson-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
         </dependency>
         <!--===========================自己导入的依赖  end===============================-->
 
@@ -103,7 +123,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.26</version>
         </dependency>
-    <!--数据库连接池        -->
+        <!--数据库连接池        -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
@@ -119,15 +139,15 @@
 
         <!--===================分页插件 start====================-->
         <!--<dependency>-->
-            <!--<groupId>com.github.pagehelper</groupId>-->
-            <!--<artifactId>pagehelper</artifactId>-->
-            <!--<version>5.1.2</version>-->
+        <!--<groupId>com.github.pagehelper</groupId>-->
+        <!--<artifactId>pagehelper</artifactId>-->
+        <!--<version>5.1.2</version>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-            <!--<groupId>com.github.pagehelper</groupId>-->
-            <!--<artifactId>pagehelper-spring-boot-autoconfigure</artifactId>-->
-            <!--<version>1.2.5</version>-->
+        <!--<groupId>com.github.pagehelper</groupId>-->
+        <!--<artifactId>pagehelper-spring-boot-autoconfigure</artifactId>-->
+        <!--<version>1.2.5</version>-->
         <!--</dependency>-->
 
         <dependency>
@@ -138,11 +158,6 @@
         <!--===================分页插件 end====================-->
 
 
-        <!--安全-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-security</artifactId>-->
-        <!--</dependency>-->
 
         <!--Springboot热部署-->
         <dependency>
@@ -150,12 +165,6 @@
             <artifactId>spring-boot-devtools</artifactId>
             <!--这个设为true，才会生效-->
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
         </dependency>
 
         <!-- 导入配置文件处理器，配置文件进行绑定就会有提示 -->
@@ -207,35 +216,35 @@
         <!--项目相关的所有资源路径列表。如配置文件。 最终会被打包。-->
         <resources>
             <!--<resource>-->
-                <!--&lt;!&ndash;资源文件存放的路径。该路径相对于pom路径&ndash;&gt;-->
-                <!--<directory>src/main/java</directory>-->
-                <!--&lt;!&ndash;包含的列表&ndash;&gt;-->
-                <!--<includes>-->
-                    <!--<include>**/*.properties</include>-->
-                    <!--<include>**/*.xml</include>-->
-                    <!--<include>**/*.tld</include>-->
-                <!--</includes>-->
-                <!--<filtering>false</filtering>-->
-                <!--&lt;!&ndash;排除的列表。如果include和exclude冲突，则以exclude为准&ndash;&gt;-->
-                <!--&lt;!&ndash;<excludes>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<exclude></exclude>&ndash;&gt;-->
-                <!--&lt;!&ndash;</excludes>&ndash;&gt;-->
+            <!--&lt;!&ndash;资源文件存放的路径。该路径相对于pom路径&ndash;&gt;-->
+            <!--<directory>src/main/java</directory>-->
+            <!--&lt;!&ndash;包含的列表&ndash;&gt;-->
+            <!--<includes>-->
+            <!--<include>**/*.properties</include>-->
+            <!--<include>**/*.xml</include>-->
+            <!--<include>**/*.tld</include>-->
+            <!--</includes>-->
+            <!--<filtering>false</filtering>-->
+            <!--&lt;!&ndash;排除的列表。如果include和exclude冲突，则以exclude为准&ndash;&gt;-->
+            <!--&lt;!&ndash;<excludes>&ndash;&gt;-->
+            <!--&lt;!&ndash;<exclude></exclude>&ndash;&gt;-->
+            <!--&lt;!&ndash;</excludes>&ndash;&gt;-->
             <!--</resource>-->
 
             <!--<resource>-->
-                <!--&lt;!&ndash;资源文件存放的路径。该路径相对于pom路径&ndash;&gt;-->
-                <!--<directory>src/main/resources</directory>-->
-                <!--&lt;!&ndash;包含的列表&ndash;&gt;-->
-                <!--<includes>-->
-                    <!--<include>**/*.properties</include>-->
-                    <!--<include>**/*.xml</include>-->
-                    <!--<include>**/*.tld</include>-->
-                <!--</includes>-->
-                <!--<filtering>false</filtering>-->
-                <!--&lt;!&ndash;排除的列表。如果include和exclude冲突，则以exclude为准&ndash;&gt;-->
-                <!--&lt;!&ndash;<excludes>&ndash;&gt;-->
-                <!--&lt;!&ndash;<exclude></exclude>&ndash;&gt;-->
-                <!--&lt;!&ndash;</excludes>&ndash;&gt;-->
+            <!--&lt;!&ndash;资源文件存放的路径。该路径相对于pom路径&ndash;&gt;-->
+            <!--<directory>src/main/resources</directory>-->
+            <!--&lt;!&ndash;包含的列表&ndash;&gt;-->
+            <!--<includes>-->
+            <!--<include>**/*.properties</include>-->
+            <!--<include>**/*.xml</include>-->
+            <!--<include>**/*.tld</include>-->
+            <!--</includes>-->
+            <!--<filtering>false</filtering>-->
+            <!--&lt;!&ndash;排除的列表。如果include和exclude冲突，则以exclude为准&ndash;&gt;-->
+            <!--&lt;!&ndash;<excludes>&ndash;&gt;-->
+            <!--&lt;!&ndash;<exclude></exclude>&ndash;&gt;-->
+            <!--&lt;!&ndash;</excludes>&ndash;&gt;-->
             <!--</resource>-->
         </resources>
     </build>
