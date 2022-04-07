@@ -27,6 +27,8 @@ public class UserInfo {
     private String password;
     private Integer myAge;
 
+
+
     public String getUsername() {
         return username;
     }
@@ -68,4 +70,6 @@ public class UserInfo {
                 ", myAge=" + myAge +
                 '}';
     }
+
+
 }

@@ -1,0 +1,9 @@
+配置文件优先级说明：
+–file:./config/
+–file:./
+–classpath:/config/
+–classpath:/
+（-file就是项目根路径，与src同级。 –classpath 就是resources ）
+
+优先级  由高到低  ，高优先级的配置会覆盖低优先级的配置；
+SpringBoot会从这四个位置全部加载主配置文件；互补配置；

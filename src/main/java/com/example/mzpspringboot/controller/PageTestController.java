@@ -9,6 +9,7 @@ package com.example.mzpspringboot.controller;/**
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -20,8 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PageTestController {
 
 
-    @RequestMapping("/")
+    @RequestMapping("/loginController")
     public String login(Model model){
+//        int a = 1/0;
 //       UserInfo userInfo  = new UserInfo();
 //       userInfo.setUsername("小明");
 //       userInfo.setPassword("123");
@@ -30,4 +32,30 @@ public class PageTestController {
        System.out.println("进入登陆界面。。。。");
        return "login";
     }
+
+    //======================测试security登录
+    @ResponseBody
+    @RequestMapping("/admin/hello")
+    public String admin(){
+        return "Hello admin!";
+    }
+
+    @ResponseBody
+    @RequestMapping("/dba/hello")
+    public String dba(){
+        return "Hello dba!";
+    }
+
+    @ResponseBody
+    @RequestMapping("/user/hello")
+    public String user(){
+        return "Hello user!";
+    }
+
+    @ResponseBody
+    @RequestMapping("/hello")
+    public String hello(){
+        return "Hello ";
+    }
+
 }

@@ -9,8 +9,15 @@
         select password from user_info where username = #{username}
     </select>
 
-    <!--useGeneratedKeys="true"   用于使用jdbc的getGeneratedKeys 来获取自增长的主键-->
-    <insert id="insertUserInfo" parameterType="userInfo" useGeneratedKeys="true">
+    <select id="getUserByUserName" parameterType="java.lang.String" resultType="user">
+        select id,username,password,enabled,locked from `user` where username = #{username}
+    </select>
+    <select id="getUserRolesById" parameterType="java.lang.Integer" resultType="role">
+        select r.id,r.name,r.nameZh,ur.uid,ur.rid from role r,user_role ur where r.id=ur.id and ur.id = #{id}
+    </select>
+
+    <!--useGeneratedKeys="true"  keyProperty="需要返回的主键"  用于使用jdbc的getGeneratedKeys 来获取自增长的主键-->
+    <insert id="insertUserInfo" parameterType="userInfo"  useGeneratedKeys="true" keyProperty="id"  >
         insert into user_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
           <if test="username != null">
