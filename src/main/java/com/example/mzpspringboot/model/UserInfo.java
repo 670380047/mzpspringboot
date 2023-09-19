@@ -7,27 +7,27 @@ package com.example.mzpspringboot.model;/**
  */
 
 
-import javax.persistence.*;
-
 /**
  *
  * @Author maozp3
  * @Description:
  * @Date: 2019/4/12 11:15
  */
-
-@Entity  //表名这是个实体类
-@Table(name = "userInfo")  //表名  会将驼峰式转换为下划线 user_info
 public class UserInfo {
-    @Id  //主键
-    @GeneratedValue(strategy = GenerationType.IDENTITY)   //mysql和sqlserver的自增策略。 oracle用SEQUENCE
-    @Column(name = "id")   //列名。
-    private Long id;  //mysql中自增长类型一定要是数值类型，不能是String
+    private Long userInfoId;  //mysql中自增长类型一定要是数值类型，不能是String
     private String username;
     private String password;
     private Integer myAge;
+    private String sex;
 
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
     public String getUsername() {
         return username;
@@ -53,23 +53,22 @@ public class UserInfo {
         this.myAge = myAge;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserInfoId() {
+        return userInfoId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserInfoId(Long userInfoId) {
+        this.userInfoId = userInfoId;
     }
 
     @Override
     public String toString() {
         return "UserInfo{" +
-                "id=" + id +
+                "userInfoId=" + userInfoId +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", myAge=" + myAge +
+                ", sex='" + sex + '\'' +
                 '}';
     }
-
-
 }

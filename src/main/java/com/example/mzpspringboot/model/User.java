@@ -21,9 +21,12 @@ import java.util.List;
  * @Date: 2020/5/13 12:01
  */
 public class User implements UserDetails {
-    private int id;
+    private  long serialVersionUID = -1;
+    private int userId;
     private String username;
     private String password;
+    private Integer myAge;
+    private String sex;
     /**
      * 账户是否启用：1-启用，2-未启用
      */
@@ -103,12 +106,22 @@ public class User implements UserDetails {
     }
 
 //------------------自定义的getter  Setter
-    public int getId() {
-        return id;
+
+
+    public long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSerialVersionUID(long serialVersionUID) {
+        this.serialVersionUID = serialVersionUID;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public void setUsername(String username) {
@@ -119,8 +132,28 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    public Integer getMyAge() {
+        return myAge;
+    }
+
+    public void setMyAge(Integer myAge) {
+        this.myAge = myAge;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
     public void setEnabled(int enabled) {
         this.enabled = enabled;
+    }
+
+    public int getLocked() {
+        return locked;
     }
 
     public void setLocked(int locked) {
@@ -138,9 +171,11 @@ public class User implements UserDetails {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "userId=" + userId +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", myAge=" + myAge +
+                ", sex='" + sex + '\'' +
                 ", enabled=" + enabled +
                 ", locked=" + locked +
                 ", roles=" + roles +

@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.mzpspringboot.dao.IUserInfoMapper" >
-    <select id="getAll" resultType="userInfo">
-        select  id,username,my_age myAge , password from user_info
+    <select id="getAll" resultType="user">
+        select  user_Id, username, my_age myAge , sex, password from user
     </select>
 
     <select id="getByUserName" parameterType="java.lang.String" resultType="java.lang.String">
-        select password from user_info where username = #{username}
+        select password from user where username = #{username}
     </select>
 
     <select id="getUserByUserName" parameterType="java.lang.String" resultType="user">
-        select id,username,password,enabled,locked from `user` where username = #{username}
+        select user_id,userName ,password, locked, enabled from `user` where userName = #{username}
     </select>
     <select id="getUserRolesById" parameterType="java.lang.Integer" resultType="role">
-        select r.id,r.name,r.nameZh,ur.uid,ur.rid from role r,user_role ur where r.id=ur.id and ur.id = #{id}
+        select r.role_id userRoleId,r.name,r.name_Zh ,ur.user_id,ur.role_id from role r,user_role ur
+        where r.role_id=ur.role_id and ur.user_id = #{userId}
     </select>
 
     <!--useGeneratedKeys="true"  keyProperty="需要返回的主键"  用于使用jdbc的getGeneratedKeys 来获取自增长的主键-->
-    <insert id="insertUserInfo" parameterType="userInfo"  useGeneratedKeys="true" keyProperty="id"  >
-        insert into user_info
+    <insert id="insertUserInfo" parameterType="user"  useGeneratedKeys="true" keyProperty="userId"  >
+        insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
           <if test="username != null">
               username,
@@ -43,8 +44,8 @@
         </trim>
     </insert>
 
-    <update id="updateUserInfo" parameterType="UserInfo">
-        update user_info
+    <update id="updateUserInfo" parameterType="User">
+        update user
         <set>
             <if test="username != null">
                 username = #{username}
@@ -56,11 +57,11 @@
                 my_age = #{myAge}
             </if>
         </set>
-        where id = #{id}
+        where user_Id = #{userInfoId}
     </update>
 
-    <delete id="deleteUserInfo" parameterType="UserInfo">
-        delete user_info
-        where id = #{id}
+    <delete id="deleteUserInfo" parameterType="User">
+        delete user
+        where userId = #{userInfoId}
     </delete>
 </mapper>

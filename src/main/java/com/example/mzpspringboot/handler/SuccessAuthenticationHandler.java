@@ -36,6 +36,6 @@ public class SuccessAuthenticationHandler implements AuthenticationSuccessHandle
 //        System.out.println(user);
 
 
-        httpServletResponse.sendRedirect(httpServletRequest.getContextPath()+"/main/welcome");
+        httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/main/welcome");
     }
 }

@@ -6,7 +6,6 @@ package com.example.mzpspringboot.controller;/**
  * @Software: IntelliJ IDEA 2019.3.15
  */
 
-import com.example.mzpspringboot.dao.IUserInfoDao;
 import com.example.mzpspringboot.model.User;
 import com.example.mzpspringboot.model.UserInfo;
 import com.example.mzpspringboot.service.CheckUserService;
@@ -39,8 +38,7 @@ import java.util.Map;
 public class TestController {
     @Autowired
     CheckUserService checkUserService;
-    @Autowired
-    IUserInfoDao userInfoDao;
+
 
 
 
@@ -74,9 +72,9 @@ public class TestController {
          */
 //        map.put("username",request.getParameter("username"));
 //        map.put("password",request.getParameter("password"));
-        map.put("username",user.getUsername());
-        map.put("password",user.getPassword());
-        map.put("user",user);
+        map.put("username", user.getUsername());
+        map.put("password", user.getPassword());
+        map.put("user", user);
 //        if(checkUserService.checkUser(map)){}
             System.out.println("进入主页。。。。。。");
 
@@ -91,25 +89,25 @@ public class TestController {
     }
 
     @RequestMapping("insert")
-    public String insert(UserInfo userInfo){
+    public String insert(User user){
         /**
          * spring security 自带的加密算法： bCryptPasswordEncoder.encode("明文密码")
          */
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        System.out.println("加密前："+userInfo);
-        String password = userInfo.getPassword();   // 取出明文
+        System.out.println("加密前："+user);
+        String password = user.getPassword();   // 取出明文
         String encodedPassword =  passwordEncoder.encode(password);   // 加密
-        userInfo.setPassword(encodedPassword);  // 将密文放入实体类中，存入数据库
-        System.out.println("加密后："+userInfo);
-        System.out.println("测试获取自增长序列(sql执行之前)：ID="+userInfo.getId());
-        checkUserService.insertUserInfo(userInfo);
-        System.out.println("测试获取自增长序列（sql执行之后）：ID="+userInfo.getId());
+        user.setPassword(encodedPassword);  // 将密文放入实体类中，存入数据库
+        System.out.println("加密后：" + user);
+        System.out.println("测试获取自增长序列(sql执行之前)：ID=" + user.getUserId());
+        checkUserService.insertUserInfo(user);
+        System.out.println("测试获取自增长序列（sql执行之后）：ID=" + user.getUserId());
         return "redirect:getAll";
     }
 
     @RequestMapping("update")
-    public String update(UserInfo userInfo){
-        checkUserService.updateUserInfo(userInfo);
+    public String update(User user){
+        checkUserService.updateUserInfo(user);
         return "redirect:getAll";
     }
 
@@ -118,8 +116,8 @@ public class TestController {
     @RequestMapping("selectAll")
     public String selectAll(ModelMap modelMap){
         //获取所有用户信息
-        PageInfo<UserInfo> userInfoList =  checkUserService.selectAll(2,3);
-        modelMap.addAttribute("userInfoList", userInfoList);
+        PageInfo<User> userList =  checkUserService.selectAll(2,3);
+        modelMap.addAttribute("userInfoList", userList);
         modelMap.addAttribute("message", "欢迎进入MyBatis， 注解方式！");
         return "main";
     }
@@ -136,9 +134,9 @@ public class TestController {
         //设置分页，默认查询总数。
         PageHelper.startPage(start, size);
         //获取所有用户信息(因为pageHelper的作用，这里就会返回分页的内容了)
-        List<UserInfo> userInfoList =  checkUserService.getAll();
+        List<User> userList =  checkUserService.getAll();
         //根据返回的集合，创建PageInfo对象
-        PageInfo<UserInfo> pageInfo = new PageInfo<>(userInfoList);
+        PageInfo<User> pageInfo = new PageInfo<>(userList);
         System.out.println("pageInfo.pageNum="+pageInfo.getPageNum());
         //将pageInfo对象扔进Model中
         modelMap.addAttribute("userInfoList", pageInfo);

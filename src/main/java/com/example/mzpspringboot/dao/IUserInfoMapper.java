@@ -2,7 +2,6 @@ package com.example.mzpspringboot.dao;
 
 import com.example.mzpspringboot.model.Role;
 import com.example.mzpspringboot.model.User;
-import com.example.mzpspringboot.model.UserInfo;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -15,23 +14,23 @@ import java.util.List;
  * @Software: IntelliJ IDEA 2019.3.15
  */
 public interface IUserInfoMapper {
-    @Select("select  id,username,my_age myAge , password from user_info")
-    List<UserInfo> selectAll();
+    @Select("select  id,username,my_age myAge , password from user")
+    List<User> selectAll();
 
     //======================xml方式==========================
-    List<UserInfo> getAll();
+    List<User> getAll();
     String getByUserName(String userName);
 
     // security权限验证：获取用户
     List<User> getUserByUserName(String userName);
     // security权限验证：获取用户角色
-    List<Role> getUserRolesById(int id);
+    List<Role> getUserRolesById(int userId);
 
 
 
-    int insertUserInfo(UserInfo userInfo);
+    int insertUserInfo(User user);
 
-    int updateUserInfo(UserInfo userInfo);
+    int updateUserInfo(User user);
 
-    int deleteUserInfo(UserInfo userInfo);
+    int deleteUserInfo(User user);
 }

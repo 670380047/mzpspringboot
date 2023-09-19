@@ -99,13 +99,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()  //开启HttpSecurity配置
                     .antMatchers("/loginController","/myError/**").permitAll()  //这些路径页面不拦截，放行
-                    .antMatchers("/admin/**").hasRole("admin") //访问这个admin路径下的所有资源都需要admin权限
+                    .antMatchers("/admin/**").hasRole("admin") //访问这个admin路径下的所有资源都需要admin权限. 数据库里面配置'ROLE_admin'
                     .antMatchers("/dba/**").hasRole("dba")
                     .antMatchers("/user/**").access("hasRole('admin') and hasRole('user')") //访问/user下面的路径 “同时需要”admin和user两种角色的权限
                     .antMatchers("/main/**").access("hasAnyRole('dba','admin','user')")    //访问/main下面的路径需要dba 或 admin角色的权限。 配置了角色层级关系之后，实际这里可以只写user，因为dba和admin是user的上级
+                    .antMatchers("/haha/**").access("hasAnyRole('ha1')")    //访问/haha下面的路径需要ha1。  数据库里面配置'ROLE_ha1'
     //                .antMatchers("/**")
     //                .fullyAuthenticated()
-                    .anyRequest().authenticated() //用户访问其它URL都必须认证后访问（登录后访问）
+                    .anyRequest().authenticated() // 用户访问其它URL都必须认证后访问（登录后访问）
                 .and()
                     .formLogin().loginPage("/loginController")  //配置的是：能够跳转到登录页面的那个Controller的地址，用来拦截未验证的请求(只要未验证的请求，都会转到这里)，转到登录页面。在控制层。
                     .loginProcessingUrl("/myLogin") //配置的是：前台访问登录页面时要访问的地址。在前台。

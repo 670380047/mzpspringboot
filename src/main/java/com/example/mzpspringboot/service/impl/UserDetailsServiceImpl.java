@@ -32,11 +32,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<User> userList = userInfoMapper.getUserByUserName(username);
         User user = null;
-        if( userList.size() != 1){
+        if (userList.size() != 1) {
             throw new UsernameNotFoundException("用户名密码错误 或 用户名不存在");
-        }else{
+        } else {
             user = userList.get(0);
-            List<Role> roles = userInfoMapper.getUserRolesById(user.getId());
+            List<Role> roles = userInfoMapper.getUserRolesById(user.getUserId());
             // 设置角色
             user.setRoles(roles);
         }

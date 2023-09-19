@@ -16,7 +16,10 @@ import lombok.Data;
  */
 @Data
 public class Role {
-    private int id;
+    private int roleId;
+    /**
+     * 这个值需要设置权限。比如ROLE_admin的权限（可以看 com.example.mzpspringboot.configuration.WebSecurityConfig#roleHierarchy() 定义的关系）
+     */
     private String name;
     private String nameZh;
 }

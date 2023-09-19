@@ -17,6 +17,9 @@
     <property name="MAX_HISTORY" value="100" />
     <!-- 日期格式 -->
     <property name="DATETIME" value="yyyy-MM-dd HH:mm:ss" />
+
+    <property name="mzp_LOG_FILE" value="logs/mzpSpringboot.log"/>
+
     <!-- 控制台打印 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <!-- 对日志进行格式化 -->
@@ -98,6 +101,8 @@
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
+        <!--        日志文件保存的位置-->
+<!--        <File>${mzp_LOG_FILE}</File>-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_HOME}%d/debug.%i.log</fileNamePattern>
             <maxHistory>${MAX_HISTORY}</maxHistory>

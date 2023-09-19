@@ -25,6 +25,9 @@ person:
       age: 49
       isBoss: false
       birth: 1970/07/07
+
+      # springboot配置的优先级是：properties>yaml>yml。   有冲突的情况下即properties会覆盖其他的。
+      # 但是在开启了 spring.profiles.active的时候，会优先使用"激活的环境"
 spring:
   profiles:
     active: dev   #选择激活dev环境（如果为空，那默认就是使用当前文档）

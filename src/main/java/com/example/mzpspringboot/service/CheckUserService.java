@@ -7,7 +7,7 @@ package com.example.mzpspringboot.service;/**
  */
 
 import com.example.mzpspringboot.dao.IUserInfoMapper;
-import com.example.mzpspringboot.model.UserInfo;
+import com.example.mzpspringboot.model.User;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.util.StringUtil;
@@ -63,8 +63,8 @@ public class CheckUserService {
     * @return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
     **/
 
-    public List<UserInfo> getAll(){
-        List<UserInfo> list  = null;
+    public List<User> getAll(){
+        List<User> list  = null;
               list  = userInfoMapper.getAll();
         return list;
     }
@@ -76,7 +76,7 @@ public class CheckUserService {
     * @Param []
     * @return java.util.List<com.example.mzpspringboot.model.UserInfo>
     **/
-    public PageInfo<UserInfo> selectAll(int start, int size){
+    public PageInfo<User> selectAll(int start, int size){
         //设置分页,并且按照ID进行降序排列.(默认查询总数，即select count(0) from xxx)
 //        PageHelper.startPage(start, size,"id desc");
         //设置分页,不查询总数
@@ -85,37 +85,29 @@ public class CheckUserService {
         //设置分页(默认查询总数，即select count(0) from xxx)
         PageHelper.startPage(start, size);
         //获取所有用户信息(因为pageHelper的作用，这里就会返回分页的内容了)
-        List<UserInfo> userInfoList =  userInfoMapper.selectAll();
+        List<User> userList =  userInfoMapper.selectAll();
         //根据返回的集合，创建PageInfo对象
-        PageInfo<UserInfo> pageInfo = new PageInfo<>(userInfoList);
+        PageInfo<User> pageInfo = new PageInfo<>(userList);
         return pageInfo;
     }
 
     @Transactional
-    public int insertUserInfo(UserInfo userInfo){
+    public int insertUserInfo(User user){
         // spring事务管理@Transactional  这里不需要做  try .... catch。  否则事务捕获不到异常。
-        int  flag = userInfoMapper.insertUserInfo(userInfo);
-            System.out.println("userInfo对应的自增长的ID="+userInfo.getId());
+        int  flag = userInfoMapper.insertUserInfo(user);
+        System.out.println("userInfo对应的自增长的ID=" + user.getUserId());
             int n = 1/0;
         return  flag;
     }
 
 
-    public int updateUserInfo(UserInfo userInfo){
-        return  userInfoMapper.updateUserInfo(userInfo);
+    public int updateUserInfo(User user){
+        return  userInfoMapper.updateUserInfo(user);
     }
 
 
-    public int deleteUserInfo(UserInfo userInfo){
-        int flag;
-        try {
-            flag = userInfoMapper.deleteUserInfo(userInfo);
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error("数据删除错误。。。。。");
-            return 0;
-        }
-        return  flag;
+    public int deleteUserInfo(User user){
+        return  userInfoMapper.deleteUserInfo(user);
     }
 
 }

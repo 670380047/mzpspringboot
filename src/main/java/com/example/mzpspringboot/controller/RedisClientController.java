@@ -49,7 +49,7 @@ public class RedisClientController {
         userInfo.setUsername("mzp");
         userInfo.setPassword("123");
         userInfo.setMyAge(25);
-        userInfo.setId(1L);
+        userInfo.setUserInfoId(1L);
         redisTemplate.opsForValue().set("userInfo",userInfo);
         Object userInfo1 = redisTemplate.opsForValue().get("userInfo");
         result.add(userInfo1);

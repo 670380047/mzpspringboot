@@ -26,8 +26,8 @@ import org.springframework.http.HttpStatus;
 public class MyErrorPages implements ErrorPageRegistrar {
     @Override
     public void registerErrorPages(ErrorPageRegistry registry) {
-        ErrorPage forbidden = new ErrorPage(HttpStatus.FORBIDDEN,"/myError/403"); // 跳转到/403的控制器中
-        ErrorPage notFound = new ErrorPage(HttpStatus.NOT_FOUND,"/myError/404");    // 跳转到/404的控制器中
-        registry.addErrorPages(notFound,forbidden);
+        ErrorPage forbidden = new ErrorPage(HttpStatus.FORBIDDEN, "/myError/403"); // 跳转到/403的控制器中
+        ErrorPage notFound = new ErrorPage(HttpStatus.NOT_FOUND, "/myError/404");    // 跳转到/404的控制器中
+        registry.addErrorPages(notFound, forbidden);
     }
 }

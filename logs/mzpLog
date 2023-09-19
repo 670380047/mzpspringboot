@@ -1,0 +1,12 @@
+[DEBUG] 2022-12-03 14:42:28 [http-nio-8083-exec-7] c.e.m.d.I.getUserByUserName - ==>  Preparing: select user_id,userName ,password, locked, enabled from `user` where userName = ? 
+[DEBUG] 2022-12-03 14:42:28 [http-nio-8083-exec-7] c.e.m.d.I.getUserByUserName - ==> Parameters: mzp(String)
+[DEBUG] 2022-12-03 14:42:28 [http-nio-8083-exec-7] c.e.m.d.I.getUserByUserName - <==      Total: 1
+[DEBUG] 2022-12-03 14:42:29 [http-nio-8083-exec-7] c.e.m.d.I.getUserRolesById - ==>  Preparing: select r.role_id userRoleId,r.name,r.name_Zh ,ur.user_id,ur.role_id from role r,user_role ur where r.role_id=ur.role_id and ur.user_id = ? 
+[DEBUG] 2022-12-03 14:42:29 [http-nio-8083-exec-7] c.e.m.d.I.getUserRolesById - ==> Parameters: 1(Integer)
+[DEBUG] 2022-12-03 14:42:29 [http-nio-8083-exec-7] c.e.m.d.I.getUserRolesById - <==      Total: 2
+[DEBUG] 2022-12-03 14:42:29 [http-nio-8083-exec-9] c.e.m.d.IUserInfoMapper.getAll_COUNT - ==>  Preparing: SELECT count(0) FROM user 
+[DEBUG] 2022-12-03 14:42:29 [http-nio-8083-exec-9] c.e.m.d.IUserInfoMapper.getAll_COUNT - ==> Parameters: 
+[DEBUG] 2022-12-03 14:42:29 [http-nio-8083-exec-9] c.e.m.d.IUserInfoMapper.getAll_COUNT - <==      Total: 1
+[DEBUG] 2022-12-03 14:42:29 [http-nio-8083-exec-9] c.e.m.dao.IUserInfoMapper.getAll - ==>  Preparing: select user_Id, username, my_age myAge , sex, password from user LIMIT ? 
+[DEBUG] 2022-12-03 14:42:29 [http-nio-8083-exec-9] c.e.m.dao.IUserInfoMapper.getAll - ==> Parameters: 3(Integer)
+[DEBUG] 2022-12-03 14:42:29 [http-nio-8083-exec-9] c.e.m.dao.IUserInfoMapper.getAll - <==      Total: 2

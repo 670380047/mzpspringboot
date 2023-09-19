@@ -9,6 +9,7 @@ package com.example.mzpspringboot.controller;/**
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -20,8 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class PageTestController {
 
-
-    @RequestMapping("/loginController")
+    // 浏览器请求过来是get。  不设置，或者设置为get都可以。  设置为post时，就不支持在浏览器输入url了
+    @RequestMapping(value = "/loginController", method = RequestMethod.GET)
     public String login(Model model){
 //        int a = 1/0;
 //       UserInfo userInfo  = new UserInfo();
@@ -50,6 +51,12 @@ public class PageTestController {
     @RequestMapping("/user/hello")
     public String user(){
         return "Hello user!";
+    }
+
+    @ResponseBody
+    @RequestMapping("/haha/hello")
+    public String haha(){
+        return "Hello test haha!";
     }
 
     @ResponseBody

@@ -29,7 +29,7 @@ session值:<span id="session"  th:if="${session != null}" th:text="${session.myI
         </tr>
         <!--遍历userInfoList。使用了分页工具，传过来的是pageInfo，list是其中一个属性。显示红线，但是没有错-->
         <tr th:each="userInfo:${userInfoList.list}">
-            <td th:text="${userInfo.id}">这里是用户ID</td>
+            <td th:text="${userInfo.userId}">这里是用户ID</td>
             <td th:text="${userInfo.username}">这里是用户名</td>
             <td th:text="${userInfo.password}">这里是密码</td>
             <td th:text="${userInfo.myAge}">这里是年龄</td>
@@ -49,5 +49,6 @@ session值:<span id="session"  th:if="${session != null}" th:text="${session.myI
 <div> <a th:href="@{../dba/hello}">dba</a> </div>
 <div> <a th:href="@{../admin/hello}">admin</a> </div>
 <div> <a th:href="@{../user/hello}">user</a> </div>
+<div> <a th:href="@{../haha/hello}">haha</a> </div>
 </body>
 </html>
